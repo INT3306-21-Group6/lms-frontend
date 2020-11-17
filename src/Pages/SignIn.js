@@ -1,4 +1,5 @@
-import React, { useState} from "react";
+import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
+import React, { useState } from "react";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -35,7 +36,26 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function SignIn() {
+  //   const [formData, setFormData] = useState({
+  //     email: "",
+  //     password: "",
+  //   });
+
+  const [submitted, setSubmitted] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
   const classes = useStyles();
+
+  const handlePasswordChange = (event) => {
+    setPassword(event.target.value);
+  };
+
+  const handleSubmit = () => {
+    setSubmitted({ submitted: true }, () => {
+      setTimeout(() => setSubmitted({ submitted: false }), 5000);
+    });
+  };
 
   return (
     <Container component="main" maxWidth="xs">
@@ -49,25 +69,32 @@ export default function SignIn() {
         <Typography component="h1" variant="h5" className={classes.h5}>
           Sign in
         </Typography>
-        <form className={classes.form} noValidate>
-          <TextField
+        <ValidatorForm onSubmit={handleSubmit}>
+          <TextValidator
+            label="Email Address"
+            onChange={(e) => setEmail(e.target.value)}
+            name="email"
+            value={email}
+            validators={["required", "isEmail"]}
+            errorMessages={["this field is required", "email is not valid"]}
             variant="outlined"
             margin="normal"
-            required
             fullWidth
             id="email"
-            label="Email Address"
-            name="email"
             autoComplete="email"
             autoFocus
           />
-          <TextField
+          <br />
+          <TextValidator
+            label="Password"
+            onChange={handlePasswordChange}
+            name="password"
+            value={password}
+            validators={["required"]}
+            errorMessages={["this field is required"]}
             variant="outlined"
             margin="normal"
-            required
             fullWidth
-            name="password"
-            label="Password"
             type="password"
             id="password"
             autoComplete="current-password"
@@ -77,17 +104,17 @@ export default function SignIn() {
             label="Remember me"
           />
           <Button
-            type="submit"
-            fullWidth
-            variant="contained"
             color="primary"
-            className={classes.submit}
+            variant="contained"
+            type="submit"
+            disabled={submitted}
+            fullWidth
           >
             Sign In
           </Button>
           <Grid container>
             <Grid item xs>
-              <Link href="#" variant="body2">
+              <Link to="#" variant="body2">
                 Forgot password?
               </Link>
             </Grid>
@@ -97,7 +124,7 @@ export default function SignIn() {
               </Link>
             </Grid>
           </Grid>
-        </form>
+        </ValidatorForm>
       </div>
     </Container>
   );

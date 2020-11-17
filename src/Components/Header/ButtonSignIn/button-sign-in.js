@@ -8,7 +8,7 @@ import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import { AccountCircleRounded } from "@material-ui/icons";
 import { Row, Col } from "react-bootstrap";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   modal: {
@@ -96,7 +96,11 @@ export default function SignInButton() {
                 </Col>
                 <Col>
                   <Link to="/signup">
-                    <Button variant="contained" color="primary">
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      onClick={handleClose}
+                    >
                       Sign up
                     </Button>
                   </Link>

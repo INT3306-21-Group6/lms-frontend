@@ -1,5 +1,12 @@
-import React from "react";
-import Avatar from "@material-ui/core/Avatar";
+import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
+import React, { useState } from "react";
+import {
+  Avatar,
+  MenuItem,
+  FormControl,
+  InputLabel,
+  Select,
+} from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
@@ -10,8 +17,6 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
-import { FormControl, InputLabel, Select, MenuItem } from "@material-ui/core";
-import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -35,12 +40,33 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SignUp() {
-  const classes = useStyles();
+export default function SignIn() {
+  //   const [formData, setFormData] = useState({
+  //     email: "",
+  //     password: "",
+  //   });
+
+  const [submitted, setSubmitted] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [gender, setGender] = React.useState("");
+
+  const classes = useStyles();
+
+  const handlePasswordChange = (event) => {
+    setPassword(event.target.value);
+  };
   const handleChangeGender = (event) => {
     setGender(event.target.value);
   };
+  const handleSubmit = () => {
+    setSubmitted({ submitted: true }, () => {
+      setTimeout(() => setSubmitted({ submitted: false }), 5000);
+    });
+  };
+
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -53,52 +79,67 @@ export default function SignUp() {
         <Typography component="h1" variant="h5" className={classes.h5}>
           Sign up
         </Typography>
-        <form className={classes.form} validate>
+        <ValidatorForm onSubmit={handleSubmit}>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
-              <TextField
-                autoComplete="fname"
-                name="firstName"
+              <TextValidator
+                label="First Name"
+                onChange={(e) => setFirstName(e.target.value)}
+                name="first name"
+                value={firstName}
+                validators={["required"]}
+                errorMessages={["this field is required"]}
                 variant="outlined"
-                required
+                margin="normal"
                 fullWidth
                 id="firstName"
-                label="First Name"
+                autoComplete="fname"
                 autoFocus
               />
             </Grid>
             <Grid item xs={12} sm={6}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                id="lastName"
+              <TextValidator
                 label="Last Name"
-                name="lastName"
+                onChange={(e) => setLastName(e.target.value)}
+                name="last name"
+                value={lastName}
+                validators={["required"]}
+                errorMessages={["this field is required"]}
+                variant="outlined"
+                margin="normal"
+                fullWidth
+                id="lastname"
                 autoComplete="lname"
+                autoFocus
               />
             </Grid>
             <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                id="email"
+              <TextValidator
                 label="Email Address"
+                onChange={(e) => setEmail(e.target.value)}
                 name="email"
-                autoComplete="email"
+                value={email}
                 validators={["required", "isEmail"]}
                 errorMessages={["this field is required", "email is not valid"]}
-                // onChange={handleChangeEmail}
+                variant="outlined"
+                margin="normal"
+                fullWidth
+                id="email"
+                autoComplete="email"
+                autoFocus
               />
             </Grid>
             <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                name="password"
+              <TextValidator
                 label="Password"
+                onChange={handlePasswordChange}
+                name="password"
+                value={password}
+                validators={["required"]}
+                errorMessages={["this field is required"]}
+                variant="outlined"
+                margin="normal"
+                fullWidth
                 type="password"
                 id="password"
                 autoComplete="current-password"
@@ -141,6 +182,8 @@ export default function SignUp() {
               <FormControlLabel
                 control={<Checkbox value="allowExtraEmails" color="primary" />}
                 label="I accept the Terms of Service."
+                validators={["required"]}
+                errorMessages={["You have to agree with the Terms of Service."]}
               />
             </Grid>
           </Grid>
@@ -160,7 +203,7 @@ export default function SignUp() {
               </Link>
             </Grid>
           </Grid>
-        </form>
+        </ValidatorForm>
       </div>
     </Container>
   );
