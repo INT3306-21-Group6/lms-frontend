@@ -1,43 +1,30 @@
-import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
-import React, { useState, Fragment } from "react";
+import React, { Fragment } from "react";
 import {
   Avatar,
   AppBar,
   IconButton,
   Toolbar,
-  TextField,
-  CssBaseline,
-  Paper,
   Box,
   Menu,
   MenuItem,
   Fade,
 } from "@material-ui/core";
-import Button from "@material-ui/core/Button";
-import { Link } from "react-router-dom";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
-import { fade, makeStyles } from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
-import SearchIcon from "@material-ui/icons/Search";
-import InputBase from "@material-ui/core/InputBase";
 import AddBoxIcon from "@material-ui/icons/AddBox";
 import ThumbUpIcon from "@material-ui/icons/ThumbUp";
 import ChatBubbleIcon from "@material-ui/icons/ChatBubble";
 import SearchBar from "material-ui-search-bar";
 
-import clsx from "clsx";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
 import CardMedia from "@material-ui/core/CardMedia";
 import CardContent from "@material-ui/core/CardContent";
 import CardActions from "@material-ui/core/CardActions";
 import { green, pink, yellow, blue } from "@material-ui/core/colors";
-import Collapse from "@material-ui/core/Collapse";
-import FavoriteIcon from "@material-ui/icons/Favorite";
-import ShareIcon from "@material-ui/icons/Share";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -121,9 +108,6 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Forum() {
   const classes = useStyles();
-  const [expanded, setExpanded] = React.useState(false);
-
-  const [auth, setAuth] = React.useState(true);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
 
