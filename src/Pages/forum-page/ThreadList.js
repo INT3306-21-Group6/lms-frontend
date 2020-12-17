@@ -25,7 +25,7 @@ import Pagination from '@material-ui/lab/Pagination';
 import toastFetchErrors from '../../Components/tools/toast-fetch-errors';
 import { toast } from 'react-toastify';
 import getThreadList from '../../api/graphql/get-thread-list';
-import renderHTML from 'react-render-html';
+
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
@@ -155,8 +155,7 @@ export function CardForum({ forum }) {
             onClick={viewThread}
             style={{ cursor: 'pointer' }}
           >
-            {renderHTML(forum.content)}
-            {console.log("forum content: " ,forum.content)}
+            {forum.content}
           </Typography>
         </CardContent>
         <CardActions disableSpacing>

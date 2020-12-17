@@ -10,7 +10,7 @@ const getUserCourseList = async ({
     $userId: Int!
     $status: EnrollStatus = Accepted
     $pageNumber: Int = 0
-    $pageSize: Int = 100
+    $pageSize: Int = 10
 ) {
     userCourseList (
         userId: $userId

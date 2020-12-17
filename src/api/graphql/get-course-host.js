@@ -17,7 +17,6 @@ const getCourseHost = async (courseId) => {
     }
   }
 }`;
-
   const vars = {
     courseId,
   };

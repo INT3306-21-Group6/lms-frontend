@@ -25,9 +25,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Slide from '@material-ui/core/Slide';
-import deletePost from '../../api/graphql/deletePost';
-import renderHTML from 'react-render-html';
-
+import deletePost from '../../api/graphql/deletePost'
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -126,7 +124,7 @@ export function ReplyCard({ content }) {
         />
         <CardContent onClick={clickOnCard(1)}>
           <Typography variant="body2" color="textSecondary" component="p">
-            {renderHTML(content.content)}
+            {content.content}
           </Typography>
         </CardContent>
         <CardActions disableSpacing>
